@@ -17,6 +17,9 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
+            body {
+                background-color: #f5f5f5
+            }
             .input-group{
                 padding:100px 92px 50px;
                 max-width: 1000px;
@@ -24,7 +27,9 @@
             .comment-container{
                 padding-left: 20px;
                 margin: -23px 92px 30px;
-                border: 1px solid #333;
+                border: 1px solid rgba(0,0,0,0.125);
+                background-color: #fff;
+                border-radius: 5px;
             }
             .comment-author{
                 color:#007bff;

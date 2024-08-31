@@ -28,7 +28,7 @@
                 border-radius: 5px;
                 display: inline-block;
                 text-align: center;
-                padding: 8px;
+                padding: 16px;
                 background-color: #fff
             }
             .supplier-heading{
@@ -68,8 +68,12 @@
             .filter-container {
                 flex: 2;
             }
+            .supplier_link{
+                text-decoration: none;
+            }
             .selected {
                 font-weight: 700;
+                text-decoration: none;
             }
             .card-title {
                 min-height: 70px;
@@ -112,15 +116,15 @@
         <div class="home-container">
             <div class="filter-container">
                 <div class="filter-item">
-                    <h5 class="supplier-heading">Nhà cung cấp</h5>
+                    <h5 class="supplier-heading">Suppliers</h5>
                     <% String seletedSupplierId = (String) request.getParameter("supplierId");  %>
                     <div class="">
                         <% ArrayList<Supplier> supplierList = (ArrayList<Supplier>) request.getAttribute("supplierList"); %>
                         <% for (Supplier supplier : supplierList) {%>
-<!--                        <div >
-                            <a class="<%= seletedSupplierId != null && supplier.getId() == Integer.parseInt(seletedSupplierId) ? "selected" : ""%>" href="./home?supplierId=<%= supplier.getId()%>" class="btn"><%= supplier.getCompanyName()%></a>
-                        </div>-->
-                        <button class="btn btn--supplier" onclick="handleFilterBySupplier(<%= supplier.getId()%>)"><%= supplier.getCompanyName()%></button>
+                        <div class="supplier-item">
+                            <a class="<%= seletedSupplierId != null && supplier.getId() == Integer.parseInt(seletedSupplierId) ? "selected" : "supplier_link"%>" href="./home?supplierId=<%= supplier.getId()%>" class="btn"><%= supplier.getCompanyName()%></a>
+                        </div>
+<!--                        <button class="btn btn--supplier" onclick="handleFilterBySupplier(<%= supplier.getId()%>)"><%= supplier.getCompanyName()%></button>-->
                         <br>
                         <% } %>
                     </div>

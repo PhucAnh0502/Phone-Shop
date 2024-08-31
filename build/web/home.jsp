@@ -14,18 +14,45 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style>
+            .home-container{
+                background-color: #f5f5f5
+            }
+            .nav-link{
+                font-weight: 700;
+            }
+            .filter-item{
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                border-radius: 5px;
+                display: inline-block;
+                text-align: center;
+                padding: 8px;
+                background-color: #fff
+            }
+            .supplier-heading{
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0 0 4px 0;
+            }
+            .btn--supplier{
+                background-color: #007bff;
+                color: #fff;
+                min-width: 92px;
+                margin: 5px 10px;
+                padding: 5px 5px;
+            }
             .product-list {
                 flex: 8;
                 float: left;
             }
-
+            .sort-container{
+                margin-left: 10px;
+            }
             .product {
                 width: 20%;
                 display: inline-block;
-                margin: auto 10px;
+                margin: 10px 10px;
             }
 
             .strike {
@@ -44,6 +71,13 @@
             .selected {
                 font-weight: 700;
             }
+            .card-title {
+                min-height: 70px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
@@ -51,7 +85,7 @@
         <% User user = (User) session.getAttribute("user"); %>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar w/ text</a>
+<!--            <a class="navbar-brand" href="#">Navbar w/ text</a>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -78,7 +112,7 @@
         <div class="home-container">
             <div class="filter-container">
                 <div class="filter-item">
-                    <h5>Nhà cung cấp</h5>
+                    <h5 class="supplier-heading">Nhà cung cấp</h5>
                     <% String seletedSupplierId = (String) request.getParameter("supplierId");  %>
                     <div class="">
                         <% ArrayList<Supplier> supplierList = (ArrayList<Supplier>) request.getAttribute("supplierList"); %>
@@ -86,16 +120,18 @@
 <!--                        <div >
                             <a class="<%= seletedSupplierId != null && supplier.getId() == Integer.parseInt(seletedSupplierId) ? "selected" : ""%>" href="./home?supplierId=<%= supplier.getId()%>" class="btn"><%= supplier.getCompanyName()%></a>
                         </div>-->
-                        <button class="btn" onclick="handleFilterBySupplier(<%= supplier.getId()%>)"><%= supplier.getCompanyName()%></button>
+                        <button class="btn btn--supplier" onclick="handleFilterBySupplier(<%= supplier.getId()%>)"><%= supplier.getCompanyName()%></button>
                         <br>
                         <% } %>
                     </div>
                 </div>
             </div>
             <div class="product-list">
-                <a href="./home?sortBy=title&order=asc" class="btn btn-primary">Sort by title</a>
-                <a href="./home?sortBy=price&order=asc" class="btn btn-info">Sort by price</a>
-                <a href="./home?sortBy=sale_rate&order=desc" class="btn btn-secondary">Sort by sale</a>
+                <div class="sort-container">
+                    <a href="./home?sortBy=title&order=asc" class="btn btn-primary">Sort by title</a>
+                    <a href="./home?sortBy=price&order=asc" class="btn btn-info">Sort by price</a>
+                    <a href="./home?sortBy=sale_rate&order=desc" class="btn btn-secondary">Sort by sale</a>
+                </div>
                 <br>
                 <% ArrayList<Product> productList = (ArrayList<Product>) request.getAttribute("productList"); %>
                 <% for (Product product : productList) {%>
